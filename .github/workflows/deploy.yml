@@ -28,12 +28,12 @@ jobs:
           mkdir -p ~/.snowflake
 
           cat > ~/.snowflake/config.toml <<EOF
-          default_connection_name = "ci"
+          default_connection_name = "dev"
 
-          [connections.ci]
+          [connections.dev]
           account = "${{ secrets.vq24160.central-india.azure }}"
-          user = "${{ secrets.satya30 }}"
-          password = "${{ secrets.Satya@78730327 }}"
+          user = "${{ secrets.SNOWFLAKE_USER }}"
+          password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
           warehouse = "COMPUTE_WH"
           database = "ANALYTICS_DB"
           schema = "DEV"
@@ -42,8 +42,8 @@ jobs:
 
       - name: Execute SQL Scripts
         run: |
-          snow sql -c ci -f ../setup.sql
+          snow sql -c dev -f ../setup.sql
 
       - name: Deploy Streamlit App
         run: |
-          snow streamlit deploy -c ci
+          snow streamlit deploy -c dev
