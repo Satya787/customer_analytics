@@ -31,7 +31,7 @@ jobs:
           default_connection_name = "dev"
 
           [connections.dev]
-          account = "${{ secrets.vq24160.central-india.azure }}"
+          account = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
           user = "${{ secrets.SNOWFLAKE_USER }}"
           password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
           warehouse = "COMPUTE_WH"
