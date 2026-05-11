@@ -1,0 +1,49 @@
+name: Snowflake Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Snowflake CLI
+        run: |
+          pip install snowflake-cli-labs
+
+      - name: Configure Snowflake Connection
+        run: |
+          mkdir -p ~/.snowflake
+
+          cat > ~/.snowflake/config.toml <<EOF
+          default_connection_name = "ci"
+
+          [connections.ci]
+          account = "${{ secrets.vq24160.central-india.azure }}"
+          user = "${{ secrets.satya30 }}"
+          password = "${{ secrets.Satya@78730327 }}"
+          warehouse = "COMPUTE_WH"
+          database = "ANALYTICS_DB"
+          schema = "DEV"
+          role = "ACCOUNTADMIN"
+          EOF
+
+      - name: Execute SQL Scripts
+        run: |
+          snow sql -c ci -f ../setup.sql
+
+      - name: Deploy Streamlit App
+        run: |
+          snow streamlit deploy -c ci
