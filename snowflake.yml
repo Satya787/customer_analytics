@@ -1,0 +1,16 @@
+definition_version: '2'
+entities:
+  customer_dashboard:
+    type: streamlit
+    identifier:
+      name: customer_dashboard
+    main_file: streamlit_app.py
+    pages_dir: pages
+    query_warehouse: compute_wh
+    stage: analytics_stage
+    artifacts:
+      - streamlit_app.py
+      - environment.yml
+      - pages
+      - common/hello.py
+
