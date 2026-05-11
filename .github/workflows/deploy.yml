@@ -44,7 +44,7 @@ jobs:
 
       - name: Execute SQL Scripts
         run: |
-          snow sql -c dev -f ../../setup.sql
+          snow sql -c dev -f sql/setup/setup.sql
 
       - name: Deploy Streamlit App
         run: |
