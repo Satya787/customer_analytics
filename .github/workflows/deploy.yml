@@ -41,10 +41,10 @@ jobs:
           EOF
 
           chmod 600 ~/.snowflake/config.toml
-          
+
       - name: Execute SQL Scripts
         run: |
-          snow sql -c dev -f ../setup.sql
+          snow sql -c dev -f ../../setup.sql
 
       - name: Deploy Streamlit App
         run: |
